@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bni4voo08i3qt"]
+
+[ext_resource type="Script" uid="uid://ciysd65qlhk74" path="res://scripts/characters/player/player.gd" id="1_ekqmh"]
+[ext_resource type="Texture2D" uid="uid://d1iew7afnrvm5" path="res://sprites/characters/player/Dungeon_Character_2.png" id="1_v7pse"]
+[ext_resource type="PackedScene" uid="uid://bged3vdtgxu3b" path="res://scene/characters/hurtbox.tscn" id="3_ekqmh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cm2cf"]
+atlas = ExtResource("1_v7pse")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6smn3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cm2cf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_glldc"]
+size = Vector2(5, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_viwsh"]
+size = Vector2(7, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj7nq"]
+size = Vector2(5, 12)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=573441635]
+script = ExtResource("1_ekqmh")
+max_health = 10.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1572243117]
+sprite_frames = SubResource("SpriteFrames_6smn3")
+
+[node name="hurtbox" parent="." unique_id=726239995 instance=ExtResource("3_ekqmh")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hurtbox" unique_id=220082800]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_glldc")
+
+[node name="hurtbox_ground" parent="." unique_id=292757212 instance=ExtResource("3_ekqmh")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="ground_check" type="CollisionShape2D" parent="hurtbox_ground" unique_id=529917870]
+position = Vector2(-0.5, 6)
+shape = SubResource("RectangleShape2D_viwsh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1183175721]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_vj7nq")
