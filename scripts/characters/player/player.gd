@@ -1,17 +1,18 @@
 extends CharacterBody2D
 
+signal health_depleted()
 
 const SPEED = 80.0
 const JUMP_VELOCITY = -400.0
+var health;
 @export var max_health: float
 
 @onready var hurtbox: hurtbox = $hurtbox
 @onready var hurtbox_ground: hurtbox = $hurtbox_ground
 
 func _ready() -> void:
-	hurtbox_ground.set_health(max_health)
-	
-	
+	health = max_health
+
 func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
@@ -28,3 +29,17 @@ func _physics_process(delta: float) -> void:
 		velocity.y = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func take_damge(damage: float) -> void:
+	health -= damage
+	print("test", damage, health)
+	if health <= 0:
+		health_depleted.emit()
+
+
+func _on_hurtbox_take_damage(damage: Variant) -> void:
+	take_damge(damage)
+
+
+func _on_hurtbox_ground_take_damage(damage: Variant) -> void:
+	take_damge(damage)

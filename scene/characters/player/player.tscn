@@ -52,3 +52,6 @@ shape = SubResource("RectangleShape2D_viwsh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1183175721]
 position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_vj7nq")
+
+[connection signal="take_damage" from="hurtbox" to="." method="_on_hurtbox_take_damage"]
+[connection signal="take_damage" from="hurtbox_ground" to="." method="_on_hurtbox_ground_take_damage"]
