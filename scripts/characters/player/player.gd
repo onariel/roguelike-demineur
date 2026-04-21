@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 
 func take_damge(damage: float) -> void:
 	health -= damage
-	print("test", damage, health)
+	print(damage, health)
 	if health <= 0:
 		health_depleted.emit()
 

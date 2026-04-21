@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://b5m5giv6auxtm" path="res://sprites/characters/enemies/traps/spike.gd" id="1_x1fnl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1fnl"]
-size = Vector2(12, 12)
+size = Vector2(10, 11)
 
 [node name="spike" type="CharacterBody2D" unique_id=1249334425]
 script = ExtResource("1_x1fnl")
@@ -21,4 +21,5 @@ script = ExtResource("1_nvfde")
 metadata/_custom_type_script = "uid://lyqqq2vdsagd"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" unique_id=225603912]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_x1fnl")
