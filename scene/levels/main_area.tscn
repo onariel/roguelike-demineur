@@ -117,7 +117,7 @@ tile_map_data = PackedByteArray("AAABAAEAAAAGAAAAAAABAAIAAAAGAAEAAAABAAMAAAAGAAI
 tile_set = SubResource("TileSet_wabom")
 
 [node name="spike" parent="." unique_id=1249334425 instance=ExtResource("3_wabom")]
-position = Vector2(104, 56)
+position = Vector2(106, 51)
 
 [node name="CharacterBody2D" parent="." unique_id=573441635 instance=ExtResource("2_hgckq")]
 position = Vector2(72, 42)
