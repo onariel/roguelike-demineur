@@ -4,3 +4,6 @@
 
 [node name="Enemies" type="CharacterBody2D" unique_id=105202946]
 script = ExtResource("1_nmuvu")
+
+[node name="knockback_time" type="Timer" parent="." unique_id=789399539]
+wait_time = 0.2
