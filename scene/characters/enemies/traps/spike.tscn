@@ -10,6 +10,7 @@ size = Vector2(10, 11)
 [node name="spike" type="CharacterBody2D" unique_id=1249334425]
 script = ExtResource("1_x1fnl")
 damage = 2.0
+knockback = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1763836532]
 texture = ExtResource("1_fsbq6")

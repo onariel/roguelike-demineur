@@ -1,8 +1,8 @@
 extends Area2D
 class_name hurtbox
 
-signal take_damage(damage, pos)
+signal take_damage(damage, knockback_direction, knockback_force)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is hitbox:
-		take_damage.emit(area.get_damage(), area.get_parent().position)
+		take_damage.emit(area.get_damage(), (global_position - area.get_parent().global_position).normalized(), area.get_knockback())

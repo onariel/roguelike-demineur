@@ -3,11 +3,17 @@ extends CharacterBody2D
 signal health_depleted()
 
 const SPEED = 80.0
-const JUMP_VELOCITY = -400.0
+const KNOCKBACK_FRICTION: float = 50
 var health;
 var knockback = 50.0
 var recovery_time_time = 0.5
-var last_hit_verctor: Vector2
+var last_knockback_direction: Vector2
+var last_knockback_force: float
+var is_knocked_back: bool = false
+var knockback_duration: float = 0.5
+var knockback_velocity := Vector2.ZERO
+
+@export var knockback_resistance: float
 @export var max_health: float
 
 @onready var hurtbox: hurtbox = $hurtbox
@@ -21,39 +27,30 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction_x := Input.get_axis("ui_left", "ui_right")
-	var direction_y := Input.get_axis("ui_up", "ui_down")
 	
+	if is_knocked_back:
+		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, KNOCKBACK_FRICTION * delta)
+		velocity = knockback_velocity
+		move_and_slide()
+		return
 	
-	if recovery_time.time_left < 0.25:
-		if direction_x:
-			velocity.x = direction_x * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-		if direction_y:
-			velocity.y = direction_y * SPEED
-		else:
-			velocity.y = move_toward(velocity.x, 0, SPEED)
-	else:
-		var angle = get_angle_to(last_hit_verctor)
-		if 0.45 <= angle and angle < 1.35:
-			velocity.x = -knockback
-			velocity.y = 0
-		elif 1.35 <= angle and angle < 2.25:
-			velocity.y = -knockback
-			velocity.x = 0
-		elif 2.25 <= angle and angle < 3.15:
-			velocity.x = knockback
-			velocity.y = 0
-		else:
-			velocity.y = knockback
-			velocity.x = 0
+	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	velocity = input_dir * SPEED
 	move_and_slide()
+	
+	
+	
 
-func take_damge(damage: float, pos : Vector2) -> void:
+func take_damge(damage: float, knockback_direction : Vector2, knockback_force : float) -> void:
 	if recovery_time.time_left == 0:
-		last_hit_verctor = pos
-		print(get_angle_to(pos))
+		var adjusted_force = knockback_force * (1.0 - knockback_resistance)
+		knockback_velocity = knockback_direction * knockback_resistance * knockback_force
+		is_knocked_back = true
+		
+		if knockback_duration > 0:
+			await get_tree().create_timer(knockback_duration).timeout
+			is_knocked_back = false
+			velocity = Vector2.ZERO
 		recovery_time.start(recovery_time_time)
 		health -= damage
 		print(damage, health)
@@ -61,9 +58,9 @@ func take_damge(damage: float, pos : Vector2) -> void:
 			health_depleted.emit()
 
 
-func _on_hurtbox_take_damage(damage: float, pos : Vector2) -> void:
-	take_damge(damage, pos)
+func _on_hurtbox_take_damage(damage: float, knockback_direction : Vector2, knockback_force : float) -> void:
+	take_damge(damage, knockback_direction, knockback_force)
 
 
-func _on_hurtbox_ground_take_damage(damage: float, pos : Vector2) -> void:
-	take_damge(damage, pos)
+func _on_hurtbox_ground_take_damage(damage: float, knockback_direction : Vector2, knockback_force : float) -> void:
+	take_damge(damage, knockback_direction, knockback_force)

@@ -6,7 +6,7 @@ var hit_verctor: Vector2
 
 @export var knockback: float
 @export var max_health: float
-@export var hurtbox:hurtbox
+@export var hurtbox: hurtbox
 
 @onready var knockback_time: Timer = $knockback_time
 

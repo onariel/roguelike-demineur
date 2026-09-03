@@ -169,9 +169,11 @@ tile_set = SubResource("TileSet_wabom")
 
 [node name="spike" parent="." unique_id=1249334425 instance=ExtResource("3_wabom")]
 position = Vector2(106, 51)
+knockback = 50.0
 
 [node name="CharacterBody2D" parent="." unique_id=573441635 instance=ExtResource("2_hgckq")]
 position = Vector2(72, 42)
+knockback_resistance = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=502146206]
 position = Vector2(80, 61)
