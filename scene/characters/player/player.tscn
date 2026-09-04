@@ -30,7 +30,6 @@ size = Vector2(10, 10)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=573441635]
 script = ExtResource("1_ekqmh")
-max_health = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1572243117]
 sprite_frames = SubResource("SpriteFrames_6smn3")
@@ -56,6 +55,8 @@ shape = SubResource("RectangleShape2D_vj7nq")
 
 [node name="Recovery_time" type="Timer" parent="." unique_id=231250487]
 one_shot = true
+
+[node name="attack_" type="Timer" parent="." unique_id=788048420]
 
 [connection signal="take_damage" from="hurtbox" to="." method="_on_hurtbox_take_damage"]
 [connection signal="take_damage" from="hurtbox_ground" to="." method="_on_hurtbox_ground_take_damage"]
