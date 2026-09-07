@@ -20,13 +20,14 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glldc"]
-size = Vector2(5, 8)
+size = Vector2(7, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_viwsh"]
 size = Vector2(8, 2)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj7nq"]
-size = Vector2(10, 10)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_igr1q"]
+radius = 3.0
+height = 10.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=573441635]
 script = ExtResource("1_ekqmh")
@@ -42,16 +43,16 @@ shape = SubResource("RectangleShape2D_glldc")
 
 [node name="hurtbox_ground" parent="." unique_id=292757212 instance=ExtResource("3_ekqmh")]
 position = Vector2(0, 6)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 8
+collision_mask = 8
 
 [node name="ground_check" type="CollisionShape2D" parent="hurtbox_ground" unique_id=529917870]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_viwsh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1183175721]
-position = Vector2(-1, 2)
-shape = SubResource("RectangleShape2D_vj7nq")
+position = Vector2(-0.5, 1)
+shape = SubResource("CapsuleShape2D_igr1q")
 
 [node name="Recovery_time" type="Timer" parent="." unique_id=231250487]
 one_shot = true

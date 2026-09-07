@@ -57,8 +57,10 @@ Left_Click={
 
 [layer_names]
 
-2d_physics/layer_1="player/enemies"
+2d_physics/layer_1="player hurtbox"
 2d_physics/layer_2="obstacles/wall"
+2d_physics/layer_3="enemies hurtbox"
+2d_physics/layer_4="ground"
 
 [physics]
 

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bni4voo08i3qt" path="res://scene/characters/player/player.tscn" id="2_hgckq"]
 [ext_resource type="Texture2D" uid="uid://c277nmbrc7jt0" path="res://extras/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="2_lt0gu"]
 [ext_resource type="PackedScene" uid="uid://km7nwslumdmf" path="res://scene/characters/enemies/traps/spike.tscn" id="3_wabom"]
+[ext_resource type="PackedScene" uid="uid://c52i2js5edwh7" path="res://scene/characters/enemies/skeleton.tscn" id="4_lt0gu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3note"]
 texture = ExtResource("2_lt0gu")
@@ -170,11 +171,15 @@ tile_set = SubResource("TileSet_wabom")
 
 [node name="spike" parent="." unique_id=1249334425 instance=ExtResource("3_wabom")]
 position = Vector2(106, 51)
-knockback = 100.0
 
-[node name="CharacterBody2D" parent="." unique_id=573441635 instance=ExtResource("2_hgckq")]
+[node name="player" parent="." unique_id=573441635 instance=ExtResource("2_hgckq")]
 position = Vector2(72, 42)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=502146206]
 position = Vector2(80, 61)
 zoom = Vector2(4.5, 4.5)
+
+[node name="Skeleton" parent="." unique_id=1958364272 instance=ExtResource("4_lt0gu")]
+position = Vector2(98, 35)
+knockback = 100.0
+damage = 2.0
