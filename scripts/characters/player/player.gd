@@ -22,6 +22,7 @@ var knockback_velocity := Vector2.ZERO
 var knockback_resistance: float = 0
 
 @onready var recovery_time: Timer = $Recovery_time
+@onready var attack_timer: Timer = $attack_timer
 @onready var main = get_tree().get_root().get_node("main area")
 @onready var fire_ball = load("res://scene/characters/player/fire_ball.tscn")
 
@@ -43,7 +44,10 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left_Click"):
-		attack(get_global_mouse_position())
+		attack_timer.start()
+		attack_timer.timeout.emit()
+	if event.is_action_released("Left_Click"):
+		attack_timer.stop()
 
 func take_damge(damage_taken: float, knockback_direction : Vector2, knockback_force : float) -> void:
 	if recovery_time.time_left == 0:
@@ -69,7 +73,9 @@ func _on_hurtbox_ground_take_damage(damage_taken: float, knockback_direction : V
 	take_damge(damage_taken, knockback_direction, knockback_force)
 
 
-func attack(target : Vector2) -> void:
+func _on_attack_timer_timeout() -> void:
+	var target = get_global_mouse_position()
+	attack_timer.start(attack_speed)
 	var instance = fire_ball.instantiate()
 	instance.Direction = (global_position - target).angle()
 	instance.Speed = bullet_speed
@@ -78,4 +84,3 @@ func attack(target : Vector2) -> void:
 	instance.ball_rotation = (target - global_position).angle()
 	instance.initialisation(damage, bullet_size, knockback)
 	main.add_child.call_deferred(instance)
-	
