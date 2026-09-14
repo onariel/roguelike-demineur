@@ -173,7 +173,7 @@ tile_set = SubResource("TileSet_wabom")
 position = Vector2(106, 51)
 
 [node name="player" parent="." unique_id=573441635 instance=ExtResource("2_hgckq")]
-position = Vector2(72, 42)
+position = Vector2(55, 61)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=502146206]
 position = Vector2(80, 61)

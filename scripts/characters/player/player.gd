@@ -50,6 +50,7 @@ func _input(event: InputEvent) -> void:
 		attack_timer.stop()
 
 func take_damge(damage_taken: float, knockback_direction : Vector2, knockback_force : float) -> void:
+	print("player took: ", damage_taken, ", and his health went from: ", health, " to: ", health - damage_taken)
 	if recovery_time.time_left == 0:
 		recovery_time.start(recovery_time_time)
 		health -= damage_taken
@@ -82,5 +83,5 @@ func _on_attack_timer_timeout() -> void:
 	instance.Spawn_Position = global_position
 	instance.Spawn_Rotation = global_rotation
 	instance.ball_rotation = (target - global_position).angle()
-	instance.initialisation(damage, bullet_size, knockback)
 	main.add_child.call_deferred(instance)
+	instance.initialisation(damage, bullet_size, knockback)

@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func take_damage(damage_taken: float, knockback_direction : Vector2, knockback_force : float) -> void:
-
+	print(health, damage_taken)
 	health -= damage_taken
 	if health <= 0:
 		health_depleted.emit()
